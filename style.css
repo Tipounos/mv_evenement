@@ -7,19 +7,19 @@
 
 :root {
   /* Couleurs — thème clair, accent doré */
-  --color-ink: #1c1610;          /* le plus sombre, réservé aux blocs contrastés (hero, contact, footer, bouton whatsapp) et au texte foncé sur bouton doré */
-  --color-ink-light: #302519;    /* sombre intermédiaire (dégradés des blocs contrastés) */
-  --color-cream: #faf6ef;        /* fond principal clair */
-  --color-cream-dark: #f1e8d8;   /* fond des sections alternées (clair, légèrement plus soutenu) */
-  --color-surface: #ffffff;      /* surface des cartes, blanc pur pour ressortir sur le fond crème */
-  --color-text: #241d15;         /* texte principal foncé */
-  --color-text-muted: #6e6252;   /* texte secondaire foncé atténué */
-  --color-gold: #b8863f;         /* accent doré principal */
-  --color-gold-dark: #8c631f;    /* doré foncé (survol de boutons) */
-  --color-gold-light: #cda15a;   /* doré (titres et accents, lisible sur clair comme sur foncé) */
-  --color-burgundy: #a53c4c;     /* accent secondaire */
-  --color-white: #ffffff;
-  --color-border: rgba(28, 23, 16, 0.12);
+  --color-ink: #2B2118;          /* brun très sombre : hero, contact, footer, boutons */
+  --color-ink-light: #4A3829;    /* brun intermédiaire pour les dégradés */
+  --color-cream: #F6EBDD;        /* beige principal, chaleureux et lumineux */
+  --color-cream-dark: #EAD8C3;   /* beige légèrement plus soutenu pour alterner les sections */
+  --color-surface: #FFFDF9;      /* blanc cassé pour les cartes et surfaces */
+  --color-text: #30251C;         /* texte principal */
+  --color-text-muted: #786A5C;   /* texte secondaire */
+  --color-gold: #B8956A;         /* accent beige / doré principal */
+  --color-gold-dark: #8E6D49;    /* accent foncé pour les hover */
+  --color-gold-light: #D8BE9B;   /* accent clair pour les titres et détails */
+  --color-burgundy: #9A6F5B;     /* accent secondaire, rosé/taupe discret */
+  --color-white: #FFFFFF;
+  --color-border: rgba(48, 37, 28, 0.12);
  
   /* Typographie */
   --font-display: 'Cormorant Garamond', Georgia, serif;
@@ -599,7 +599,7 @@ input:focus-visible {
   font-family: var(--font-display);
   font-size: 1.2rem;
   color: var(--color-gold-light);
-  font-weight: 700;
+  font-weight: 900;
   margin-bottom: 0.5rem;
 }
 
