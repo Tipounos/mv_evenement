@@ -7,19 +7,19 @@
 
 :root {
   /* Couleurs — thème clair, accent doré */
-  --color-ink: #2B2118;          /* brun très sombre : hero, contact, footer, boutons */
-  --color-ink-light: #4A3829;    /* brun intermédiaire pour les dégradés */
-  --color-cream: #F6EBDD;        /* beige principal, chaleureux et lumineux */
-  --color-cream-dark: #EAD8C3;   /* beige légèrement plus soutenu pour alterner les sections */
-  --color-surface: #FFFDF9;      /* blanc cassé pour les cartes et surfaces */
-  --color-text: #30251C;         /* texte principal */
-  --color-text-muted: #786A5C;   /* texte secondaire */
-  --color-gold: #B8956A;         /* accent beige / doré principal */
-  --color-gold-dark: #8E6D49;    /* accent foncé pour les hover */
-  --color-gold-light: #D8BE9B;   /* accent clair pour les titres et détails */
-  --color-burgundy: #9A6F5B;     /* accent secondaire, rosé/taupe discret */
+  --color-ink: #2A1A20;
+  --color-ink-light: #4A3038;
+  --color-cream: #F8EEE8;
+  --color-cream-dark: #EEDDD5;
+  --color-surface: #FFFDFC;
+  --color-text: #33252B;
+  --color-text-muted: #7B6970;
+  --color-gold: #C98FA6;
+  --color-gold-dark: #A86D84;
+  --color-gold-light: #d691a8;
+  --color-burgundy: #B45C78;
   --color-white: #FFFFFF;
-  --color-border: rgba(48, 37, 28, 0.12);
+  --color-border: rgba(51, 37, 43, 0.12);
  
   /* Typographie */
   --font-display: 'Cormorant Garamond', Georgia, serif;
