@@ -300,6 +300,27 @@ input:focus-visible {
   height: calc(var(--header-height) - 10px);
 }
 
+.logo:not(:has(img)) {
+  color: var(--color-ink-light);
+  font-weight: 800;
+  position: relative;
+}
+
+.logo:not(:has(img))::after {
+  content: "";
+  width: 85%;
+  bottom: -6px;
+  height: 3px;
+  right: 0;
+  position: absolute;
+  background: var(--color-gold);
+  transition: width var(--transition-fast);
+}
+
+.logo:not(:has(img)):hover::after {
+  width: 110%;
+}
+
 .logo__main {
   font-family: var(--font-display);
   font-size: 1.5rem;
