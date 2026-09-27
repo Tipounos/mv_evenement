@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initHeroTypewriter();
   initCollectionsCarousel();
+  initReviewsCarousel();
   initGallerySlider();
   initInstagramVideos();
   initScrollReveal();
@@ -143,7 +144,91 @@ function initCollectionsCarousel() {
 }
 
 /* ==========================================================================
-   4. SLIDER GALERIE
+   4. CARROUSEL AVIS CLIENTS (une carte visible, navigation par points)
+   ========================================================================== */
+
+function initReviewsCarousel() {
+  const track = document.getElementById('reviewsTrack');
+  const dotsWrap = document.getElementById('reviewsDots');
+
+  if (!track || !dotsWrap) return;
+
+  const cards = Array.from(track.children);
+  if (cards.length === 0) return;
+
+  // Une seule carte : pas besoin de carrousel ni de points
+  if (cards.length === 1) {
+    dotsWrap.style.display = 'none';
+    return;
+  }
+
+  let index = 0;
+  let autoplayId = null;
+  const AUTOPLAY_DELAY = 6000;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Génère un point par avis
+  const dots = cards.map((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'reviews__dot';
+    dot.setAttribute('aria-label', `Voir l'avis ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i, true));
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
+
+  function render() {
+    track.style.transform = `translateX(${-index * 100}%)`;
+    dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+  }
+
+  function goTo(i, userTriggered) {
+    index = (i + cards.length) % cards.length;
+    render();
+    if (userTriggered) restartAutoplay();
+  }
+
+  function startAutoplay() {
+    if (prefersReducedMotion) return;
+    autoplayId = setInterval(() => goTo(index + 1), AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    if (autoplayId) clearInterval(autoplayId);
+  }
+
+  function restartAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  // Support du swipe tactile
+  let startX = 0;
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    stopAutoplay();
+  }, { passive: true });
+
+  track.addEventListener('touchend', (e) => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 40) {
+      diff > 0 ? goTo(index - 1) : goTo(index + 1);
+    }
+    startAutoplay();
+  });
+
+  const carousel = track.closest('.reviews__carousel');
+  carousel?.addEventListener('mouseenter', stopAutoplay);
+  carousel?.addEventListener('mouseleave', startAutoplay);
+
+  render();
+  startAutoplay();
+}
+
+/* ==========================================================================
+   5. SLIDER GALERIE
    ========================================================================== */
 
 function initGallerySlider() {
@@ -179,7 +264,7 @@ function initGallerySlider() {
 }
 
 /* ==========================================================================
-   5. LECTURE DES VIDÉOS INSTAGRAM
+   6. LECTURE DES VIDÉOS INSTAGRAM
    ========================================================================== */
 
 function initInstagramVideos() {
@@ -207,12 +292,12 @@ function initInstagramVideos() {
 }
 
 /* ==========================================================================
-   6. APPARITION AU SCROLL
+   7. APPARITION AU SCROLL
    ========================================================================== */
 
 function initScrollReveal() {
   const targets = document.querySelectorAll(
-    '.carousel, .ig-card, .approach__inner, .review-card, .section__title'
+    '.carousel, .reviews__widget, .reviews__carousel, .ig-card, .approach__inner, .section__title'
   );
 
   targets.forEach((el) => el.classList.add('reveal'));
