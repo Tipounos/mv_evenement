@@ -3,10 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MV Événement — Organisation &amp; décoration événementielle</title>
+    <title>À propos — MV Événement | Décoration événementielle à Gignac-la-Nerthe</title>
     <meta
       name="description"
-      content="MV Événement : organisation et décoration événementielle à Gignac-la-Nerthe. Mariages, événements d’entreprise, salons et projets sur mesure pour créer des moments élégants et mémorables."
+      content="Découvrez l'histoire de MV Événement : une passion pour la décoration et les beaux moments. Vanessa imagine des décors sur mesure pour particuliers et professionnels."
+    />
+    <meta name="theme-color" content="#2a1a20" />
+
+    <!-- Open Graph (ajoute og:image et og:url une fois le nom de domaine connu) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="MV Événement" />
+    <meta property="og:title" content="À propos — MV Événement" />
+    <meta
+      property="og:description"
+      content="Une aventure née de la passion de la décoration : découvrez l'histoire et la façon de travailler de MV Événement."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,10 +25,6 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Poppins:wght@300;400;500;600&display=swap"
       rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
     />
 
     <link rel="stylesheet" href="style.css" />
@@ -29,29 +36,33 @@
     <header class="site-header" id="site-header">
       <div class="header__inner">
         <a
-          href="#accueil"
+          href="index.html"
           class="logo"
           aria-label="MV Événement, retour à l'accueil"
         >
-          MV événements
+          MV Événement
         </a>
 
         <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
           <ul class="main-nav__list">
             <li><a href="index.html" class="main-nav__link">Accueil</a></li>
             <li>
-              <a href="#collections" class="main-nav__link">Collections</a>
+              <a href="index.html#collections" class="main-nav__link">Collections</a>
             </li>
             <li>
-              <a href="about.html" class="main-nav__link">À propos</a>
+              <a href="about.html" class="main-nav__link" aria-current="page">À propos</a>
             </li>
-            <li><a href="#galerie" class="main-nav__link">Galerie</a></li>
-            <li><a href="#contact" class="main-nav__link">Contact</a></li>
+            <li>
+              <a href="index.html#galerie" class="main-nav__link">Galerie</a>
+            </li>
+            <li>
+              <a href="index.html#contact" class="main-nav__link">Contact</a>
+            </li>
           </ul>
         </nav>
 
         <div class="header__actions">
-          <a href="#contact" class="btn btn--gold btn--small header__cta"
+          <a href="index.html#contact" class="btn btn--gold btn--small header__cta"
             >Réserver</a
           >
 
@@ -72,211 +83,212 @@
     </header>
 
     <main id="main-content">
-        <section class="section hero">
-            <img
-            class="hero__image"
-            src="assets/images/about-hero.webp"
-            alt="Décoration événementielle MV Événement"
-            onerror="this.style.display = 'none'"
-            />
-            <div class="hero__overlay" aria-hidden="true"></div>
-            <div class="hero__content">
-                <h1 class="hero__title reveal">Derrière chaque événement, une <span class="highlight">histoire</span></h1>
-                <p class="hero__subtitle"></p>
-            </div>
-            
-        </section>
-        
-        <!-- ============ NOTRE HISTOIRE ============ -->
-        <section class="section about-story" id="notre-histoire">
-          <div class="container about-story__inner">
-            <div class="about-story__content">
-              <p class="eyebrow">Notre histoire</p>
+      <!-- ============ HERO ============ -->
+      <section class="hero hero--page">
+        <img
+          class="hero__image"
+          src="assets/images/about-hero.webp"
+          alt=""
+          fetchpriority="high"
+          decoding="async"
+          onerror="this.style.display = 'none'"
+        />
+        <div class="hero__overlay" aria-hidden="true"></div>
+        <div class="hero__content">
+          <h1 class="hero__title">
+            Derrière chaque événement, une <span class="highlight">histoire</span>
+          </h1>
+          <p class="hero__subtitle">
+            Des décors sur mesure pour des moments qui vous ressemblent.
+          </p>
+        </div>
+      </section>
 
-              <h2 class="section__title section__title--left">
-                Une aventure née de la passion
-              </h2>
+      <!-- ============ NOTRE HISTOIRE ============ -->
+      <section class="section about-story" id="notre-histoire" aria-labelledby="story-title">
+        <div class="container about-story__inner">
+          <div class="about-story__content">
+            <p class="eyebrow">Notre histoire</p>
 
-              <div class="divider divider--left" aria-hidden="true">
-                <span></span>
-              </div>
-
-              <p class="about-story__text">
-                Derrière MV Événement, il y a avant tout une passion pour la
-                décoration, la création et les beaux moments partagés.
-              </p>
-
-              <p class="about-story__text">
-                Vanessa imagine et crée des univers pensés pour chaque
-                occasion. Chaque projet est l'occasion de partir d'une idée,
-                d'une envie ou d'une ambiance pour la transformer en une
-                décoration unique et personnalisée.
-              </p>
-
-              <p class="about-story__text">
-                Au fil des événements, MV Événement accompagne particuliers et
-                professionnels dans la création de moments qui leur ressemblent,
-                avec une attention particulière portée aux détails.
-              </p>
-            </div>
-
-            <div class="about-story__media">
-              <img
-                src="assets/images/about-story.webp"
-                alt="Décoration réalisée par MV Événement"
-                loading="lazy"
-                onerror="this.parentElement.classList.add('is-placeholder')"
-              />
-
-              <div class="about-story__caption">
-                <span>MV Événement</span>
-                <span>Créer · Décorer · Sublimer</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-        <!-- ============ NOTRE VISION ============ -->
-        <section class="section about-vision">
-          <div class="container">
-            <div class="about-vision__header">
-              <p class="eyebrow">Notre vision</p>
-
-              <h2 class="section__title">
-                Chaque événement mérite une attention particulière
-              </h2>
-
-              <div class="divider" aria-hidden="true">
-                <span></span>
-              </div>
-
-              <p class="about-vision__intro">
-                Chez MV Événement, nous ne cherchons pas simplement à décorer
-                un espace. Nous imaginons une atmosphère, une ambiance et des
-                détails qui donnent une véritable identité à votre événement.
-              </p>
-            </div>
-
-            <div class="about-values">
-              <article class="about-value">
-                <span class="about-value__number">01</span>
-
-                <div>
-                  <h3>Personnalisation</h3>
-                  <p>
-                    Chaque projet est imaginé selon vos envies, votre univers
-                    et l'occasion que vous souhaitez célébrer.
-                  </p>
-                </div>
-              </article>
-
-              <article class="about-value">
-                <span class="about-value__number">02</span>
-
-                <div>
-                  <h3>Créativité</h3>
-                  <p>
-                    Nous cherchons à créer des décors élégants, originaux et
-                    pensés jusque dans les moindres détails.
-                  </p>
-                </div>
-              </article>
-
-              <article class="about-value">
-                <span class="about-value__number">03</span>
-
-                <div>
-                  <h3>Écoute</h3>
-                  <p>
-                    Parce que votre événement vous appartient, vos idées et
-                    vos envies sont au cœur de chaque création.
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-
-
-        <!-- ============ NOTRE FAÇON DE TRAVAILLER ============ -->
-        <section class="section about-process">
-          <div class="container">
-            <div class="about-process__header">
-              <p class="eyebrow">Notre façon de travailler</p>
-
-              <h2 class="section__title">
-                De votre idée à sa réalisation
-              </h2>
-
-              <div class="divider" aria-hidden="true">
-                <span></span>
-              </div>
-            </div>
-
-            <div class="process">
-              <article class="process__item">
-                <span class="process__number">01</span>
-
-                <div class="process__content">
-                  <h3>Échanger</h3>
-                  <p>
-                    Nous prenons le temps de découvrir votre projet, vos envies
-                    et l'ambiance que vous souhaitez créer.
-                  </p>
-                </div>
-              </article>
-
-              <article class="process__item">
-                <span class="process__number">02</span>
-
-                <div class="process__content">
-                  <h3>Imaginer</h3>
-                  <p>
-                    Nous construisons ensemble une décoration cohérente,
-                    personnalisée et adaptée à votre événement.
-                  </p>
-                </div>
-              </article>
-
-              <article class="process__item">
-                <span class="process__number">03</span>
-
-                <div class="process__content">
-                  <h3>Créer</h3>
-                  <p>
-                    Nous donnons vie à votre projet et soignons chaque détail
-                    pour créer une ambiance qui vous ressemble.
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-
-
-        <!-- ============ CTA ============ -->
-        <section class="section about-cta">
-          <div class="container about-cta__inner">
-            <p class="eyebrow">Votre projet</p>
-
-            <h2 class="section__title">
-              Et si nous imaginions votre prochain événement ?
+            <h2 class="section__title section__title--left" id="story-title">
+              Une aventure née de la passion
             </h2>
 
-            <p class="about-cta__text">
-              Une idée, une envie ou simplement besoin d'en discuter ?
-              Échangeons autour de votre projet et imaginons ensemble un
-              événement qui vous ressemble.
+            <div class="divider divider--left" aria-hidden="true">
+              <span></span>
+            </div>
+
+            <p class="about-story__text">
+              Derrière MV Événement, il y a avant tout une passion pour la
+              décoration, la création et les beaux moments partagés.
             </p>
 
+            <p class="about-story__text">
+              Vanessa imagine et crée des univers pensés pour chaque occasion.
+              Chaque projet est l'occasion de partir d'une idée, d'une envie ou
+              d'une ambiance pour la transformer en une décoration unique et
+              personnalisée.
+            </p>
+
+            <p class="about-story__text">
+              Au fil des événements, MV Événement accompagne particuliers et
+              professionnels dans la création de moments qui leur ressemblent,
+              avec une attention particulière portée aux détails.
+            </p>
+          </div>
+
+          <figure class="about-story__media reveal">
+            <img
+              src="assets/images/approche.webp"
+              alt="Décoration réalisée par MV Événement"
+              loading="lazy"
+              decoding="async"
+              onerror="this.parentElement.classList.add('is-placeholder')"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ NOTRE VISION ============ -->
+      <section class="section about-vision" aria-labelledby="vision-title">
+        <div class="container">
+          <div class="about-vision__header">
+            <p class="eyebrow">Notre vision</p>
+
+            <h2 class="section__title" id="vision-title">
+              Chaque événement mérite une attention particulière
+            </h2>
+
+            <div class="divider" aria-hidden="true">
+              <span></span>
+            </div>
+
+            <p class="about-vision__intro">
+              Chez MV Événement, nous ne cherchons pas simplement à décorer un
+              espace. Nous imaginons une atmosphère, une ambiance et des
+              détails qui donnent une véritable identité à votre événement.
+            </p>
+          </div>
+
+          <div class="about-values reveal">
+            <article class="about-value">
+              <span class="about-value__number" aria-hidden="true">01</span>
+              <div>
+                <h3>Personnalisation</h3>
+                <p>
+                  Chaque projet est imaginé selon vos envies, votre univers et
+                  l'occasion que vous souhaitez célébrer.
+                </p>
+              </div>
+            </article>
+
+            <article class="about-value">
+              <span class="about-value__number" aria-hidden="true">02</span>
+              <div>
+                <h3>Créativité</h3>
+                <p>
+                  Nous cherchons à créer des décors élégants, originaux et
+                  pensés jusque dans les moindres détails.
+                </p>
+              </div>
+            </article>
+
+            <article class="about-value">
+              <span class="about-value__number" aria-hidden="true">03</span>
+              <div>
+                <h3>Écoute</h3>
+                <p>
+                  Parce que votre événement vous appartient, vos idées et vos
+                  envies sont au cœur de chaque création.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ NOTRE FAÇON DE TRAVAILLER ============ -->
+      <section class="section about-process" aria-labelledby="process-title">
+        <div class="container">
+          <div class="about-process__header">
+            <p class="eyebrow">Notre façon de travailler</p>
+
+            <h2 class="section__title" id="process-title">
+              De votre idée à sa réalisation
+            </h2>
+
+            <div class="divider" aria-hidden="true">
+              <span></span>
+            </div>
+          </div>
+
+          <ol class="process reveal">
+            <li class="process__item">
+              <span class="process__number" aria-hidden="true">01</span>
+              <div class="process__content">
+                <h3>Échanger</h3>
+                <p>
+                  Nous prenons le temps de découvrir votre projet, vos envies
+                  et l'ambiance que vous souhaitez créer.
+                </p>
+              </div>
+            </li>
+
+            <li class="process__item">
+              <span class="process__number" aria-hidden="true">02</span>
+              <div class="process__content">
+                <h3>Imaginer</h3>
+                <p>
+                  Nous construisons ensemble une décoration cohérente,
+                  personnalisée et adaptée à votre événement.
+                </p>
+              </div>
+            </li>
+
+            <li class="process__item">
+              <span class="process__number" aria-hidden="true">03</span>
+              <div class="process__content">
+                <h3>Créer</h3>
+                <p>
+                  Nous donnons vie à votre projet et soignons chaque détail
+                  pour créer une ambiance qui vous ressemble.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ CTA ============ -->
+      <section class="section about-cta" aria-labelledby="cta-title">
+        <div class="container about-cta__inner">
+          <p class="eyebrow">Votre projet</p>
+
+          <h2 class="section__title" id="cta-title">
+            Et si nous imaginions votre prochain événement ?
+          </h2>
+
+          <p class="about-cta__text">
+            Une idée, une envie ou simplement besoin d'en discuter ? Échangeons
+            autour de votre projet et imaginons ensemble un événement qui vous
+            ressemble.
+          </p>
+
+          <div class="about-cta__actions">
             <a href="index.html#contact" class="btn btn--gold">
               Parlons de votre projet
             </a>
+            <a
+              href="https://wa.me/33652282930"
+              class="btn btn--outline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Écrire sur WhatsApp
+            </a>
           </div>
-        </section>
-
-
+        </div>
+      </section>
     </main>
 
     <!-- ============ FOOTER ============ -->
@@ -287,7 +299,8 @@
           <span class="logo__sub">Événement</span>
         </div>
         <p class="site-footer__tagline">
-          Organisation et décoration événementielle sur mesure, avec élégance et attention aux détails
+          Organisation et décoration événementielle sur mesure, avec élégance et
+          attention aux détails
         </p>
         <div class="site-footer__socials">
           <a
@@ -297,12 +310,12 @@
             aria-label="Instagram MV Événement"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 2c2.7 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.42.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.42.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.7 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53C6.09.28 6.82.11 7.88.06 8.94.01 9.3 0 12 0zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"
-              />
+              <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="17.5" cy="6.5" r="1.1" />
             </svg>
           </a>
-          <!-- ⚠️ À VÉRIFIER : numéro WhatsApp à remplacer par le vôtre -->
+          <!-- ⚠️ À VÉRIFIER : numéro WhatsApp à confirmer avec le client -->
           <a
             href="https://wa.me/33652282930"
             target="_blank"
@@ -311,10 +324,7 @@
           >
             <svg viewBox="0 0 32 32" aria-hidden="true">
               <path
-                d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.696 4.607 1.897 6.475L4 29l7.72-1.86A11.94 11.94 0 0 0 16 27c6.628 0 12-5.373 12-12S22.629 3 16.001 3z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
+                d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.696 4.607 1.897 6.475L4 29l7.72-1.86A11.94 11.94 0 0 0 16 27c6.628 0 12-5.373 12-12S22.629 3 16.001 3zm0 21.8a9.76 9.76 0 0 1-4.98-1.363l-.357-.213-4.583 1.104 1.223-4.47-.232-.367A9.76 9.76 0 0 1 6.2 15c0-5.404 4.397-9.8 9.801-9.8 5.403 0 9.8 4.396 9.8 9.8 0 5.404-4.397 9.8-9.8 9.8zm5.377-7.34c-.294-.147-1.74-.859-2.01-.957-.27-.098-.466-.147-.663.147-.196.294-.76.957-.933 1.153-.172.196-.343.22-.637.073-.294-.147-1.24-.457-2.362-1.457-.873-.779-1.463-1.74-1.635-2.034-.172-.294-.018-.453.129-.6.132-.132.294-.343.441-.514.147-.172.196-.294.294-.49.098-.196.049-.367-.024-.514-.073-.147-.663-1.597-.909-2.187-.239-.574-.482-.497-.663-.506l-.564-.01c-.196 0-.514.073-.784.367-.27.294-1.03 1.006-1.03 2.455 0 1.448 1.055 2.848 1.202 3.044.147.196 2.076 3.17 5.032 4.444.703.303 1.251.484 1.679.62.705.224 1.347.192 1.854.117.566-.084 1.74-.712 1.985-1.4.245-.69.245-1.28.172-1.4-.073-.122-.269-.196-.563-.343z"
               />
             </svg>
           </a>
@@ -327,7 +337,6 @@
     </footer>
 
     <!-- ============ BOUTON WHATSAPP FLOTTANT ============ -->
-    <!-- ⚠️ À VÉRIFIER : numéro WhatsApp à remplacer par le vôtre -->
     <a
       href="https://wa.me/33652282930"
       target="_blank"

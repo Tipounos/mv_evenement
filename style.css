@@ -1757,3 +1757,100 @@ input:focus-visible {
     border-radius: var(--radius-md);
   }
 }
+
+/* ==========================================================================
+   AJOUTS PAGE À PROPOS — à coller tout en bas de style.css
+   ========================================================================== */
+
+/* ---------- Hero de page (plus court que celui de l'accueil) ---------- */
+
+.hero--page {
+  min-height: 70svh;
+  padding-bottom: var(--space-lg);
+}
+
+.hero--page .hero__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* Le mot surligné était sombre sur fond sombre : on le passe en blanc */
+.hero--page .highlight {
+  color: var(--color-white);
+}
+
+.hero--page .highlight::after {
+  height: 35%;
+}
+
+.hero__subtitle {
+  max-width: 52ch;
+  margin-inline: auto;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1rem;
+}
+
+/* ---------- Navigation : page courante ---------- */
+
+.main-nav__link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Lisibilité ---------- */
+
+/* Meilleur contraste des petits titres sur fond clair */
+.about-story .eyebrow,
+.about-vision .eyebrow,
+.about-process .eyebrow {
+  color: var(--color-burgundy);
+}
+
+/* Premier paragraphe de l'histoire = texte d'introduction */
+.divider + .about-story__text {
+  font-size: 1.1rem;
+  color: var(--color-text);
+}
+
+/* La liste ordonnée du process ne doit pas afficher ses puces */
+ol.process {
+  list-style: none;
+}
+
+/* ---------- CTA : le bouton doré était invisible (sombre sur sombre) ---------- */
+
+.about-cta .btn {
+  margin: 0;
+}
+
+.about-cta .btn--gold {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+.about-cta .btn--gold:hover {
+  background: var(--color-cream);
+}
+
+.about-cta .btn--outline {
+  color: var(--color-white);
+}
+
+.about-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+/* ---------- Footer : logo MV / Événement empilé ---------- */
+
+.site-footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.site-footer__brand .logo__sub {
+  color: var(--color-gold-light);
+}
