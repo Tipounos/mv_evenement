@@ -156,6 +156,36 @@ input:focus-visible {
    TYPOGRAPHIE PARTAGÉE
    ========================================================================== */
 
+   .highlight {
+    color: var(--color-ink-light);
+    position: relative;
+    z-index: 0;
+   }
+
+   .highlight::after {
+    content: "";
+    width: 100%;
+    height: 30%;
+    bottom: 0;
+    left: 0;
+    translate: 0 -25%;
+    position: absolute;
+    background: var(--color-gold);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: highlight-show forwards 1s ease-out .8s;
+   }
+
+   @keyframes highlight-show {
+    from {
+      transform: scaleX(0%);
+    }
+    to {
+      transform: scaleX(100%);
+    }
+   }
+
 .eyebrow {
   font-family: var(--font-body);
   font-size: var(--fs-small);
@@ -1451,3 +1481,8 @@ input:focus-visible {
     gap: var(--space-sm);
   }
 }
+
+
+/* ==========================================================================
+   A propos
+   ========================================================================== */

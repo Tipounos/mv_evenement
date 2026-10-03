@@ -212,7 +212,7 @@ function initInstagramVideos() {
 
 function initScrollReveal() {
   const targets = document.querySelectorAll(
-    '.carousel, .ig-card, .approach__inner, .review-card, .section__title'
+    '.carousel, .ig-card, .approach__inner, .review-card, .section__title, .reveal'
   );
 
   targets.forEach((el) => el.classList.add('reveal'));
