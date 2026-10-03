@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initHeroTypewriter();
   initCollectionsCarousel();
-  initReviewsCarousel();
-  initTrustMarqueeTouch();
   initGallerySlider();
   initInstagramVideos();
   initScrollReveal();
@@ -145,192 +143,7 @@ function initCollectionsCarousel() {
 }
 
 /* ==========================================================================
-   4. CARROUSEL AVIS CLIENTS (une carte visible, navigation par points)
-   ========================================================================== */
-
-function initReviewsCarousel() {
-  const track = document.getElementById('reviewsTrack');
-  const dotsWrap = document.getElementById('reviewsDots');
-
-  if (!track || !dotsWrap) return;
-
-  const cards = Array.from(track.children);
-  if (cards.length === 0) return;
-
-  // Une seule carte : pas besoin de carrousel ni de points
-  if (cards.length === 1) {
-    dotsWrap.style.display = 'none';
-    return;
-  }
-
-  let index = 0;
-  let autoplayId = null;
-  const AUTOPLAY_DELAY = 6000;
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Génère un point par avis
-  const dots = cards.map((_, i) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'reviews__dot';
-    dot.setAttribute('aria-label', `Voir l'avis ${i + 1}`);
-    dot.addEventListener('click', () => goTo(i, true));
-    dotsWrap.appendChild(dot);
-    return dot;
-  });
-
-  function render() {
-    track.style.transform = `translateX(${-index * 100}%)`;
-    dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
-  }
-
-  function goTo(i, userTriggered) {
-    index = (i + cards.length) % cards.length;
-    render();
-    if (userTriggered) restartAutoplay();
-  }
-
-  function startAutoplay() {
-    if (prefersReducedMotion) return;
-    autoplayId = setInterval(() => goTo(index + 1), AUTOPLAY_DELAY);
-  }
-
-  function stopAutoplay() {
-    if (autoplayId) clearInterval(autoplayId);
-  }
-
-  function restartAutoplay() {
-    stopAutoplay();
-    startAutoplay();
-  }
-
-  // Support du swipe tactile
-  let startX = 0;
-  track.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    stopAutoplay();
-  }, { passive: true });
-
-  track.addEventListener('touchend', (e) => {
-    const diff = e.changedTouches[0].clientX - startX;
-    if (Math.abs(diff) > 40) {
-      diff > 0 ? goTo(index - 1) : goTo(index + 1);
-    }
-    startAutoplay();
-  });
-
-  const carousel = track.closest('.reviews__carousel');
-  carousel?.addEventListener('mouseenter', stopAutoplay);
-  carousel?.addEventListener('mouseleave', startAutoplay);
-
-  render();
-  startAutoplay();
-}
-
-/* ==========================================================================
-   5. LOGOS "ILS NOUS FONT CONFIANCE" — accélérer/ralentir au doigt (tactile)
-   Le défilement automatique reste géré en CSS (@keyframes trust-scroll dans
-   style.css). Au toucher, on met le CSS en pause et on prend la main :
-   glisser accélère ou inverse le sens, puis au lâcher le bandeau ralentit
-   progressivement (effet d'inertie) avant de reprendre sa vitesse normale.
-   Ne se déclenche qu'au doigt : le comportement desktop (survol = pause,
-   défilement auto) reste inchangé.
-   ========================================================================== */
-
-function initTrustMarqueeTouch() {
-  const track = document.querySelector('.trust__track');
-  if (!track) return;
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
-
-  const CSS_DURATION_MS = 26000; // doit rester égal à la durée de trust-scroll dans style.css
-  const FRICTION = 0.95;         // ralentissement après le lâcher (inertie)
-  const MIN_VELOCITY = 0.01;     // px/ms — en dessous, on redonne la main au CSS
-
-  let halfWidth = track.scrollWidth / 2;
-  window.addEventListener('resize', () => {
-    halfWidth = track.scrollWidth / 2;
-  });
-
-  function getCurrentPosition() {
-    const matrix = new DOMMatrixReadOnly(window.getComputedStyle(track).transform);
-    return ((-matrix.m41 % halfWidth) + halfWidth) % halfWidth;
-  }
-
-  let position = 0;
-  let velocity = 0; // px/ms
-  let lastX = 0;
-  let lastTime = 0;
-  let momentumId = null;
-
-  function applyPosition(p) {
-    position = ((p % halfWidth) + halfWidth) % halfWidth;
-    track.style.transform = `translateX(${-position}px)`;
-  }
-
-  function stopMomentum() {
-    if (momentumId) cancelAnimationFrame(momentumId);
-    momentumId = null;
-  }
-
-  function resumeCssAnimation() {
-    const t = (position / halfWidth) * CSS_DURATION_MS;
-    track.style.animationDelay = `-${t}ms`;
-    track.style.animationPlayState = 'running';
-    track.style.transform = '';
-  }
-
-  function runMomentum(prevTime) {
-    momentumId = requestAnimationFrame((now) => {
-      const dt = now - prevTime || 16;
-      applyPosition(position + velocity * dt);
-      velocity *= FRICTION;
-
-      if (Math.abs(velocity) < MIN_VELOCITY) {
-        stopMomentum();
-        resumeCssAnimation();
-        return;
-      }
-      runMomentum(now);
-    });
-  }
-
-  track.addEventListener('touchstart', (e) => {
-    stopMomentum();
-    position = getCurrentPosition();
-    track.style.animationPlayState = 'paused';
-    applyPosition(position);
-
-    lastX = e.touches[0].clientX;
-    lastTime = performance.now();
-  }, { passive: true });
-
-  track.addEventListener('touchmove', (e) => {
-    const x = e.touches[0].clientX;
-    const now = performance.now();
-    const dt = now - lastTime || 16;
-    const dx = lastX - x; // glisser vers la gauche = avancer le défilement
-
-    applyPosition(position + dx);
-    velocity = dx / dt;
-
-    lastX = x;
-    lastTime = now;
-  }, { passive: true });
-
-  track.addEventListener('touchend', () => {
-    if (Math.abs(velocity) < MIN_VELOCITY) {
-      resumeCssAnimation();
-      return;
-    }
-    runMomentum(performance.now());
-  });
-}
-
-/* ==========================================================================
-   6. SLIDER GALERIE
+   4. SLIDER GALERIE
    ========================================================================== */
 
 function initGallerySlider() {
@@ -366,7 +179,7 @@ function initGallerySlider() {
 }
 
 /* ==========================================================================
-   7. LECTURE DES VIDÉOS INSTAGRAM
+   5. LECTURE DES VIDÉOS INSTAGRAM
    ========================================================================== */
 
 function initInstagramVideos() {
@@ -394,12 +207,12 @@ function initInstagramVideos() {
 }
 
 /* ==========================================================================
-   8. APPARITION AU SCROLL
+   6. APPARITION AU SCROLL
    ========================================================================== */
 
 function initScrollReveal() {
   const targets = document.querySelectorAll(
-    '.carousel, .reviews__widget, .reviews__carousel, .ig-card, .approach__inner, .section__title'
+    '.carousel, .ig-card, .approach__inner, .review-card, .section__title'
   );
 
   targets.forEach((el) => el.classList.add('reveal'));
