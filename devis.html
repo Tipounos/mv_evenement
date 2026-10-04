@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>À propos — MV Événement | Décoration événementielle à Gignac-la-Nerthe</title>
+    <title>Demander un devis — MV Événement | Décoration événementielle à Gignac-la-Nerthe</title>
     <meta
       name="description"
-      content="Découvrez l'histoire de MV Événement : une passion pour la décoration et les beaux moments. Vanessa imagine des décors sur mesure pour particuliers et professionnels."
+      content="Demandez votre devis gratuit à MV Événement : décoration et organisation d'événements sur mesure. Décrivez votre projet, Vanessa vous répond rapidement."
     />
     <meta name="theme-color" content="#2a1a20" />
 
@@ -14,10 +14,10 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="MV Événement" />
-    <meta property="og:title" content="À propos — MV Événement" />
+    <meta property="og:title" content="Demander un devis — MV Événement" />
     <meta
       property="og:description"
-      content="Une aventure née de la passion de la décoration : découvrez l'histoire et la façon de travailler de MV Événement."
+      content="Parlez-nous de votre événement : nous imaginons un décor sur mesure et vous envoyons un devis."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,7 +40,7 @@
           class="logo"
           aria-label="MV Événement, retour à l'accueil"
         >
-          <img src="assets/images/logo.webp" alt="MV événements">
+          <img src="assets/images/logo.webp" alt="MV événements" />
         </a>
 
         <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
@@ -50,7 +50,7 @@
               <a href="index.html#collections" class="main-nav__link">Collections</a>
             </li>
             <li>
-              <a href="about.html" class="main-nav__link" aria-current="page">À propos</a>
+              <a href="about.html" class="main-nav__link">À propos</a>
             </li>
             <li>
               <a href="index.html#galerie" class="main-nav__link">Galerie</a>
@@ -62,7 +62,10 @@
         </nav>
 
         <div class="header__actions">
-          <a href="devis.html" class="btn btn--gold btn--small header__cta"
+          <a
+            href="devis.html"
+            class="btn btn--gold btn--small header__cta"
+            aria-current="page"
             >Réserver</a
           >
 
@@ -83,7 +86,139 @@
     </header>
 
     <main id="main-content">
+      <section class="section devis__section">
+        <h1 class="section__title">Demander un devis</h1>
+        <p class="devis__intro">
+          Parlez-nous de votre projet : nous revenons vers vous rapidement avec
+          une proposition sur mesure.
+        </p>
 
+        <div class="devis__form-wrapper">
+          <img
+            class="devis__image"
+            src="assets/images/devis.jpg"
+            alt="Décoration événementielle réalisée par MV Événement"
+          />
+
+          <!-- ⚠️ À CONFIGURER : remplace l'action par ton service d'envoi (Formspree, Netlify Forms, PHP...) -->
+          <form
+            class="devis"
+            action="https://formspree.io/f/VOTRE_ID"
+            method="POST"
+          >
+            <p class="devis__required-note">
+              Les champs marqués d'un <span aria-hidden="true">*</span> sont
+              obligatoires.
+            </p>
+
+            <label class="devis__field" for="nom">
+              <span class="devis__label">Votre nom <span aria-hidden="true">*</span></span>
+              <input
+                type="text"
+                name="nom"
+                id="nom"
+                autocomplete="name"
+                required
+              />
+            </label>
+
+            <label class="devis__field" for="type">
+              <span class="devis__label">Type d'événement <span aria-hidden="true">*</span></span>
+              <select name="type" id="type" required>
+                <option value="" disabled selected>Choisir un type</option>
+                <option>Mariage</option>
+                <option>Anniversaire</option>
+                <option>Baptême / Communion</option>
+                <option>Baby shower / Gender reveal</option>
+                <option>Événement d'entreprise</option>
+                <option>Autre</option>
+              </select>
+            </label>
+
+            <div class="devis__row">
+              <label class="devis__field" for="date">
+                <span class="devis__label">Date de l'événement <span aria-hidden="true">*</span></span>
+                <input type="date" name="date" id="date" required />
+              </label>
+
+              <label class="devis__field" for="lieu">
+                <span class="devis__label">Lieu <span aria-hidden="true">*</span></span>
+                <input
+                  type="text"
+                  name="lieu"
+                  id="lieu"
+                  placeholder="Ville ou salle"
+                  autocomplete="off"
+                  required
+                />
+              </label>
+            </div>
+
+            <div class="devis__row">
+              <label class="devis__field" for="telephone">
+                <span class="devis__label">Téléphone <span aria-hidden="true">*</span></span>
+                <input
+                  type="tel"
+                  name="telephone"
+                  id="telephone"
+                  autocomplete="tel"
+                  placeholder="06 12 34 56 78"
+                  required
+                />
+              </label>
+
+              <label class="devis__field" for="budget">
+                <span class="devis__label">Budget estimé</span>
+                <select name="budget" id="budget">
+                  <option value="" selected>Je ne sais pas encore</option>
+                  <option>Moins de 500 €</option>
+                  <option>500 € – 1 000 €</option>
+                  <option>1 000 € – 2 500 €</option>
+                  <option>2 500 € – 5 000 €</option>
+                  <option>Plus de 5 000 €</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="devis__field" for="description">
+              <span class="devis__label">Description du projet</span>
+              <textarea
+                name="description"
+                id="description"
+                rows="5"
+                placeholder="Thème, couleurs, nombre d'invités, envies particulières..."
+              ></textarea>
+            </label>
+
+            <label class="devis__field" for="source">
+              <span class="devis__label">Comment nous avez-vous connus ?</span>
+              <select name="source" id="source">
+                <option value="" selected>Choisir une réponse</option>
+                <option>Instagram</option>
+                <option>Google</option>
+                <option>Bouche à oreille</option>
+                <option>WhatsApp</option>
+                <option>Un événement où vous étiez présents</option>
+                <option>Autre</option>
+              </select>
+            </label>
+
+            <label class="devis__consent" for="consent">
+              <input type="checkbox" name="consent" id="consent" required />
+              <span>
+                J'accepte que mes informations soient utilisées pour répondre à
+                ma demande, conformément à la
+                <a href="politique-confidentialite.html">politique de confidentialité</a>.
+                <span aria-hidden="true">*</span>
+              </span>
+            </label>
+
+            <button type="submit" class="btn btn--gold devis__submit">
+              Envoyer ma demande
+            </button>
+          </form>
+        </div>
+      </section>
     </main>
 
     <!-- ============ FOOTER ============ -->
