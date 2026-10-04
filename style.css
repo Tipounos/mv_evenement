@@ -379,6 +379,10 @@ input:focus-visible {
   gap: var(--space-md);
 }
 
+  .main-nav__cta-item {
+    display: none;
+  }
+
 .main-nav__link {
   font-size: 0.92rem;
   font-weight: 500;
@@ -1438,6 +1442,10 @@ input:focus-visible {
     padding: var(--space-md);
     gap: var(--space-sm);
     text-align: center;
+  }
+
+  .main-nav__cta-item {
+    display: block;
   }
 
   .header__cta {
