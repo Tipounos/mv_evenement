@@ -59,7 +59,12 @@
 
       <!-- ============ FILTRES ============ -->
       <div class="filters">
-        <div class="filters__list" role="tablist" aria-label="Filtrer par prestation">
+        <!-- Bouton visible uniquement sur mobile : ouvre la liste des prestations -->
+        <button type="button" class="filters__toggle" id="filters-toggle" aria-expanded="false" aria-controls="filters-list">
+          <span class="filters__burger" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>Prestation : <strong id="filters-current">Tout</strong></span>
+        </button>
+        <div class="filters__list" id="filters-list" role="tablist" aria-label="Filtrer par prestation">
           <button type="button" role="tab" class="filters__tab" data-filter="all" aria-selected="true">Tout</button>
             <button type="button" role="tab" class="filters__tab" data-filter="mariage" aria-selected="false" tabindex="-1">Mariage</button>
             <button type="button" role="tab" class="filters__tab" data-filter="anniversaire" aria-selected="false" tabindex="-1">Anniversaire</button>

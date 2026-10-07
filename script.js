@@ -264,7 +264,46 @@ function initCollectionFilters() {
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function select(filter, { animate = true, updateHash = true } = {}) {
+  // Menu déroulant des filtres (mobile uniquement)
+  const toggle = document.getElementById('filters-toggle');
+  const list = document.getElementById('filters-list');
+  const current = document.getElementById('filters-current');
+  const mobileMq = window.matchMedia('(max-width: 700px)');
+
+  function setMenu(open) {
+    if (!toggle || !list) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    list.classList.toggle('is-open', open);
+  }
+
+  toggle?.addEventListener('click', () => {
+    setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Ferme le menu : clic ailleurs, touche Échap, ou passage en mode desktop
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.filters')) setMenu(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      toggle.focus();
+    }
+  });
+  mobileMq.addEventListener('change', () => setMenu(false));
+
+  // Après un choix, remonte au début de la galerie si on l'a dépassée
+  function scrollToGallery() {
+    const header = document.getElementById('site-header');
+    const bar = document.querySelector('.filters');
+    const offset = (header?.offsetHeight || 0) + (bar?.offsetHeight || 0);
+    const top = section.getBoundingClientRect().top;
+    if (top < offset) {
+      window.scrollTo({ top: window.scrollY + top - offset, behavior: reducedMotion ? 'auto' : 'smooth' });
+    }
+  }
+
+  function select(filter, { animate = true, updateHash = true, closeMenu = true } = {}) {
     if (!tabs.some((t) => t.dataset.filter === filter)) filter = 'all';
 
     tabs.forEach((tab) => {
@@ -272,7 +311,7 @@ function initCollectionFilters() {
       tab.setAttribute('aria-selected', String(active));
       tab.tabIndex = active ? 0 : -1;
       // Garde l'onglet actif visible dans la barre scrollable (mobile)
-      if (active && animate) {
+      if (active && animate && !mobileMq.matches) {
         tab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
       }
     });
@@ -288,6 +327,13 @@ function initCollectionFilters() {
     });
 
     section.dataset.active = filter;
+    const activeTab = tabs.find((t) => t.dataset.filter === filter);
+    if (current && activeTab) current.textContent = activeTab.textContent.trim();
+
+    if (animate && closeMenu && mobileMq.matches) {
+      setMenu(false);
+      scrollToGallery();
+    }
     if (intro) intro.textContent = intros[filter] || intros.all;
 
     if (updateHash) {
@@ -306,7 +352,7 @@ function initCollectionFilters() {
       e.preventDefault();
       const next = tabs[(keys[e.key] + tabs.length) % tabs.length];
       next.focus();
-      select(next.dataset.filter);
+      select(next.dataset.filter, { closeMenu: false });
     });
   });
 

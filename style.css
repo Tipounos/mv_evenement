@@ -2323,6 +2323,95 @@ ol.process {
   outline-offset: -4px;
 }
 
+/* ---------- Mobile : filtres en menu déroulant ---------- */
+
+.filters__toggle {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .filters__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: 0.9rem var(--space-md);
+    font-size: 0.9rem;
+    text-align: start;
+    color: var(--color-text-muted);
+  }
+
+  .filters__toggle strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .filters__burger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 22px;
+    flex-shrink: 0;
+  }
+
+  .filters__burger span {
+    height: 2px;
+    background: var(--color-text);
+    transition:
+      transform var(--transition-fast),
+      opacity var(--transition-fast);
+  }
+
+  .filters__toggle[aria-expanded="true"] .filters__burger span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .filters__toggle[aria-expanded="true"] .filters__burger span:nth-child(2) {
+    opacity: 0;
+  }
+  .filters__toggle[aria-expanded="true"] .filters__burger span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* La liste devient un panneau qui se déplie sous la barre */
+  .filters__list {
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    flex-direction: column;
+    overflow: visible;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition:
+      opacity var(--transition-fast),
+      transform var(--transition-fast),
+      visibility var(--transition-fast);
+  }
+
+  .filters__list.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .filters__tab {
+    flex: none;
+    padding: 1rem var(--space-md);
+    text-align: start;
+    font-size: 0.8rem;
+    border-bottom: 0;
+    border-left: 3px solid transparent;
+  }
+
+  .filters__tab[aria-selected="true"] {
+    border-left-color: var(--color-gold-dark);
+    background: var(--color-cream);
+  }
+}
+
 /* ---------- Galerie ---------- */
 
 .collection {
@@ -2450,13 +2539,4 @@ ol.process {
 
 .collection__cta .btn {
   margin: 0;
-}
-
-/* ---------- Mobile ---------- */
-
-@media (max-width: 560px) {
-  .filters__tab {
-    padding: 1rem 1.1rem;
-    font-size: 0.75rem;
-  }
 }
