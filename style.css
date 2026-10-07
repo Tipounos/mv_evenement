@@ -2341,6 +2341,10 @@ ol.process {
     color: var(--color-text-muted);
   }
 
+  .filters__burger svg:hover {
+    color: var(--color-text);
+  }
+
   .filters__toggle strong {
     color: var(--color-ink);
     font-weight: 600;
