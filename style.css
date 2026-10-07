@@ -2493,7 +2493,7 @@ ol.process {
 
 /* Image manquante : on affiche un petit motif à la place */
 .collection__item.is-placeholder::after {
-  content: "✦";
+  content: "404 : Not found";
   position: absolute;
   inset: 0;
   display: flex;
