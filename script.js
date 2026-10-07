@@ -237,3 +237,80 @@ function initScrollReveal() {
 
   targets.forEach((el) => observer.observe(el));
 }
+
+/* ==========================================================================
+   PAGE NOS COLLECTIONS — filtrage des photos par prestation
+   À charger APRÈS script.js
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', initCollectionFilters);
+
+function initCollectionFilters() {
+  const section = document.getElementById('collection');
+  const tabs = Array.from(document.querySelectorAll('.filters__tab'));
+  const items = Array.from(document.querySelectorAll('.collection__item'));
+  const intro = document.getElementById('collection-intro');
+
+  if (!section || !tabs.length) return;
+
+  // Phrase d'intro affichée sous les onglets selon la prestation choisie
+  const intros = {
+    all: 'Un aperçu de nos décorations, toutes prestations confondues.',
+    mariage: 'Arches, tables et ambiances élégantes pour sublimer votre grand jour.',
+    anniversaire: 'Des scénographies imaginées selon votre univers et vos envies.',
+    babyshower: 'Des univers doux et harmonieux pour célébrer l’arrivée de bébé.',
+    bapteme: 'Une décoration pleine de délicatesse pour célébrer votre baptême.',
+  };
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function select(filter, { animate = true, updateHash = true } = {}) {
+    if (!tabs.some((t) => t.dataset.filter === filter)) filter = 'all';
+
+    tabs.forEach((tab) => {
+      const active = tab.dataset.filter === filter;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      // Garde l'onglet actif visible dans la barre scrollable (mobile)
+      if (active && animate) {
+        tab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: reducedMotion ? 'auto' : 'smooth' });
+      }
+    });
+
+    items.forEach((item) => {
+      const show = filter === 'all' || item.dataset.category === filter;
+      item.hidden = !show;
+      item.classList.remove('is-entering');
+      if (show && animate && !reducedMotion) {
+        void item.offsetWidth; // relance l'animation
+        item.classList.add('is-entering');
+      }
+    });
+
+    section.dataset.active = filter;
+    if (intro) intro.textContent = intros[filter] || intros.all;
+
+    if (updateHash) {
+      const hash = filter === 'all' ? location.pathname + location.search : '#' + filter;
+      history.replaceState(null, '', hash);
+    }
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(tab.dataset.filter));
+
+    // Navigation clavier : flèches, Début, Fin
+    tab.addEventListener('keydown', (e) => {
+      const keys = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 };
+      if (!(e.key in keys)) return;
+      e.preventDefault();
+      const next = tabs[(keys[e.key] + tabs.length) % tabs.length];
+      next.focus();
+      select(next.dataset.filter);
+    });
+  });
+
+  // Permet des liens directs : collections.html#mariage
+  window.addEventListener('hashchange', () => select(location.hash.slice(1), { updateHash: false }));
+  select(location.hash.slice(1) || 'all', { animate: false, updateHash: false });
+}
