@@ -239,7 +239,7 @@ function initScrollReveal() {
 }
 
 /* ==========================================================================
-   PAGE NOS COLLECTIONS — filtrage des photos par prestation
+   PAGE PRESTATIONS — filtrage des photos par prestation
    À charger APRÈS script.js
    ========================================================================== */
 
@@ -292,14 +292,15 @@ function initCollectionFilters() {
   });
   mobileMq.addEventListener('change', () => setMenu(false));
 
-  // Après un choix, remonte au début de la galerie si on l'a dépassée
-  function scrollToGallery() {
+  // Remonte au début de la galerie : après un choix de filtre si on l'a dépassée,
+  // ou toujours (force) quand on arrive par un lien direct comme prestations.html#mariage
+  function scrollToGallery({ force = false, instant = false } = {}) {
     const header = document.getElementById('site-header');
     const bar = document.querySelector('.filters');
     const offset = (header?.offsetHeight || 0) + (bar?.offsetHeight || 0);
     const top = section.getBoundingClientRect().top;
-    if (top < offset) {
-      window.scrollTo({ top: window.scrollY + top - offset, behavior: reducedMotion ? 'auto' : 'smooth' });
+    if (force || top < offset) {
+      window.scrollTo({ top: window.scrollY + top - offset, behavior: instant || reducedMotion ? 'auto' : 'smooth' });
     }
   }
 
@@ -356,7 +357,21 @@ function initCollectionFilters() {
     });
   });
 
-  // Permet des liens directs : collections.html#mariage
-  window.addEventListener('hashchange', () => select(location.hash.slice(1), { updateHash: false }));
-  select(location.hash.slice(1) || 'all', { animate: false, updateHash: false });
+  // Permet des liens directs : prestations.html#mariage
+  window.addEventListener('hashchange', () => {
+    const hash = location.hash.slice(1);
+    select(hash, { updateHash: false });
+    if (tabs.some((t) => t.dataset.filter === hash)) scrollToGallery({ force: true });
+  });
+
+  const initial = location.hash.slice(1);
+  select(initial || 'all', { animate: false, updateHash: false });
+
+  // Les cards des prestations sont au-dessus de la galerie : avec un lien direct,
+  // on descend jusqu'aux photos de la prestation choisie
+  if (tabs.some((t) => t.dataset.filter === initial)) {
+    const goToGallery = () => scrollToGallery({ force: true, instant: true });
+    if (document.readyState === 'complete') goToGallery();
+    else window.addEventListener('load', goToGallery, { once: true });
+  }
 }
